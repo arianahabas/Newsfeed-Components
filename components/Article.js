@@ -103,6 +103,7 @@ const data = [
 
   Your function should take either an object as its one argument, or 5 separate strings mapping to each property of an article object.
 
+
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: Don't forget to return something from your function!
@@ -111,3 +112,48 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker(title,date,firstParagraph,secondParagraph,thirdParagraph){
+ //create
+  const article = document.createElement('div');
+  const titles = document.createElement('h2')
+  const dates = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const expandButton = document.createElement('span')
+  const articleOpen = document.createElement('div')
+//append
+  article.appendChild(titles);
+  article.appendChild(dates);
+  article.appendChild(paragraphOne);
+  article.appendChild(paragraphTwo);
+  article.appendChild(paragraphThree);
+  article.appendChild(expandButton);
+//styling
+  article.classList.add('article');
+  dates.classList.add('date')
+  expandButton.classList.add('expandButton')
+  articleOpen.classList.add('article-open')
+//programmatically update content
+  titles.textContent = title;
+  dates.textContent = date;
+  paragraphOne.textContent = firstParagraph;
+  paragraphTwo.textContent = secondParagraph;
+  paragraphThree.textContent = thirdParagraph;
+
+  //add any events
+  expandButton.addEventListener('click',(e)=>{
+    articleOpen.classList.toggle('article-open');
+  })
+   
+  return article;
+}
+
+const articles = document.querySelector('.articles')
+
+data.forEach((obj)=>{
+  console.log(`creating article: ${obj.title}`)
+  //add the whole article to the DOM programattically
+  articles.appendChild(articleMaker(obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph ));
+})
