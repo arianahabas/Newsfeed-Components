@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: `Title`,
+    date: `10/10/29 `,
+    firstParagraph: `blah blah blah`,
+    secondParagraph: `blah blah blah`,
+    thirdParagraph: `blah blah blah`,
   }
 ];
 
@@ -103,6 +110,7 @@ const data = [
 
   Your function should take either an object as its one argument, or 5 separate strings mapping to each property of an article object.
 
+
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: Don't forget to return something from your function!
@@ -111,3 +119,49 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articles = document.querySelector('.articles')
+
+
+function articleMaker(title,date,firstParagraph,secondParagraph,thirdParagraph){
+ //create
+  const article = document.createElement('div');
+  const titles = document.createElement('h2')
+  const dates = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const expandButton = document.createElement('span')
+ 
+//append
+  article.appendChild(titles);
+  article.appendChild(dates);
+  article.appendChild(paragraphOne);
+  article.appendChild(paragraphTwo);
+  article.appendChild(paragraphThree);
+  article.appendChild(expandButton);
+//styling
+  article.classList.add('article');
+  dates.classList.add('date')
+  expandButton.classList.add('expandButton')
+
+//programmatically update content
+  titles.textContent = title;
+  dates.textContent = date;
+  paragraphOne.textContent = firstParagraph;
+  paragraphTwo.textContent = secondParagraph;
+  paragraphThree.textContent = thirdParagraph;
+  expandButton.textContent = '+'
+
+  //add any events
+  expandButton.addEventListener('click',()=>{
+    article.classList.toggle('article-open');
+  })
+   
+  return article;
+}
+console.log(articleMaker(data))
+
+
+data.forEach((obj)=>{
+  articles.appendChild(articleMaker(obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph ));
+})
