@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: `Title`,
+    date: `10/10/29 `,
+    firstParagraph: `blah blah blah`,
+    secondParagraph: `blah blah blah`,
+    thirdParagraph: `blah blah blah`,
   }
 ];
 
@@ -112,6 +119,8 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articles = document.querySelector('.articles')
+
 
 function articleMaker(title,date,firstParagraph,secondParagraph,thirdParagraph){
  //create
@@ -122,7 +131,7 @@ function articleMaker(title,date,firstParagraph,secondParagraph,thirdParagraph){
   const paragraphTwo = document.createElement('p');
   const paragraphThree = document.createElement('p');
   const expandButton = document.createElement('span')
-  const articleOpen = document.createElement('div')
+ 
 //append
   article.appendChild(titles);
   article.appendChild(dates);
@@ -134,26 +143,25 @@ function articleMaker(title,date,firstParagraph,secondParagraph,thirdParagraph){
   article.classList.add('article');
   dates.classList.add('date')
   expandButton.classList.add('expandButton')
-  articleOpen.classList.add('article-open')
+
 //programmatically update content
   titles.textContent = title;
   dates.textContent = date;
   paragraphOne.textContent = firstParagraph;
   paragraphTwo.textContent = secondParagraph;
   paragraphThree.textContent = thirdParagraph;
+  expandButton.textContent = '+'
 
   //add any events
-  expandButton.addEventListener('click',(e)=>{
-    articleOpen.classList.toggle('article-open');
+  expandButton.addEventListener('click',()=>{
+    article.classList.toggle('article-open');
   })
    
   return article;
 }
+console.log(articleMaker(data))
 
-const articles = document.querySelector('.articles')
 
 data.forEach((obj)=>{
-  console.log(`creating article: ${obj.title}`)
-  //add the whole article to the DOM programattically
   articles.appendChild(articleMaker(obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph ));
 })
